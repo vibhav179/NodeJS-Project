@@ -1,0 +1,29 @@
+var nodemailer = require('nodemailer');
+var exphbs  = require('express-handlebars');
+var hbs = require('nodemailer-express-handlebars');
+
+//setup the server connection to my Gmail account
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'vibhav179@gmail.com',
+    pass: 'V_17091990'
+  }
+});
+
+//setup the actual email content to send out from my Gmail account
+var mailOptions = {
+  from: 'vibhav179@gmail.com',
+  to: 'vibhav179@gmail.com',
+  subject: 'Sending Email using Node.js',
+  html: '<h1>Welcome</h1><p>This is my first email.</p>'
+};
+
+//Handle any server connection errors when trying to connect to the Gmail server
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
